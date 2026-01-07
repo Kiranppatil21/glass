@@ -1,0 +1,178 @@
+{
+  "identity": {
+    "name": "E1",
+    "role": "Creative Designer",
+    "aesthetic": "Crystal & Steel - Modern Industrial Luxury",
+    "principles": [
+      "Fusion over Imitation: Mix Industrial Precision with Luxury Elegance",
+      "Emotion First: Trust, Clarity, and Innovation",
+      "Content is King: Every pixel serves the user's goal (Calculate, Book, Track)",
+      "Zoom In: Focus on the texture and quality of the glass",
+      "Negative Space: Let the content breathe, like a clean glass pane"
+    ]
+  },
+  "typography": {
+    "fonts": {
+      "heading": {
+        "family": "Manrope",
+        "weights": ["400", "600", "800"],
+        "usage": "Headings, Hero Titles, Big Numbers"
+      },
+      "body": {
+        "family": "DM Sans",
+        "weights": ["400", "500", "700"],
+        "usage": "Paragraphs, UI Elements, Data Tables"
+      }
+    },
+    "rules": [
+      "Headings > 32px must use tracking-tight",
+      "Overlines must be Uppercase + tracking-widest + text-xs",
+      "Line height: leading-none for headers, leading-relaxed for body"
+    ]
+  },
+  "colors": {
+    "palette": {
+      "primary": {
+        "name": "Lucumaa Cyan",
+        "50": "#ecfeff",
+        "100": "#cffafe",
+        "200": "#a5f3fc",
+        "300": "#67e8f9",
+        "400": "#22d3ee",
+        "500": "#06b6d4",
+        "600": "#0891b2",
+        "700": "#0e7490",
+        "800": "#155e75",
+        "900": "#164e63",
+        "950": "#083344"
+      },
+      "neutral": {
+        "name": "Industrial Slate",
+        "50": "#f8fafc",
+        "100": "#f1f5f9",
+        "200": "#e2e8f0",
+        "300": "#cbd5e1",
+        "400": "#94a3b8",
+        "500": "#64748b",
+        "600": "#475569",
+        "700": "#334155",
+        "800": "#1e293b",
+        "900": "#0f172a",
+        "950": "#020617"
+      },
+      "accent": {
+        "name": "Electric Sky",
+        "DEFAULT": "#0ea5e9",
+        "foreground": "#ffffff"
+      }
+    },
+    "usage": {
+      "light_mode": {
+        "background": "#ffffff",
+        "foreground": "#0f172a",
+        "card": "#ffffff",
+        "border": "#e2e8f0",
+        "primary": "#0e7490",
+        "accent": "#0ea5e9"
+      },
+      "dark_mode": {
+        "background": "#020617",
+        "foreground": "#f8fafc",
+        "card": "#0f172a",
+        "border": "#1e293b",
+        "primary": "#22d3ee",
+        "accent": "#38bdf8"
+      }
+    }
+  },
+  "visual_enhancers": {
+    "glassmorphism": {
+      "light": "bg-white/70 backdrop-blur-xl border border-white/40 shadow-sm",
+      "dark": "bg-slate-950/60 backdrop-blur-xl border border-white/10 shadow-lg"
+    },
+    "gradients": {
+      "hero_overlay": "bg-gradient-to-b from-transparent via-transparent to-white/90",
+      "brand_glow": "bg-gradient-to-r from-cyan-500/20 to-blue-500/20 blur-3xl"
+    },
+    "borders": {
+      "subtle": "border border-slate-200 dark:border-slate-800",
+      "active": "border-cyan-500 ring-2 ring-cyan-500/20"
+    }
+  },
+  "layout_strategies": {
+    "marketing": {
+      "grid": "Bento Grid (Tetris Mode)",
+      "spacing": "Generous (p-12 to p-24)",
+      "container": "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
+    },
+    "dashboard": {
+      "grid": "Control Room Grid (Dense)",
+      "spacing": "Compact (p-4 to p-6)",
+      "container": "w-full px-4"
+    }
+  },
+  "components": {
+    "buttons": {
+      "primary": "bg-primary text-white hover:bg-primary/90 shadow-lg hover:shadow-xl transition-all duration-300 rounded-lg px-8 py-3 font-semibold tracking-wide",
+      "secondary": "bg-white text-slate-900 border border-slate-200 hover:bg-slate-50 hover:border-slate-300 transition-all duration-300 rounded-lg px-8 py-3 font-medium",
+      "ghost": "text-slate-600 hover:text-primary hover:bg-primary/5 transition-colors rounded-lg px-4 py-2"
+    },
+    "cards": {
+      "feature": "group relative overflow-hidden rounded-2xl bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 hover:border-cyan-500/50 transition-all duration-500 hover:shadow-2xl hover:-translate-y-1",
+      "product": "aspect-[4/5] relative overflow-hidden rounded-xl bg-slate-100 dark:bg-slate-800 group"
+    },
+    "inputs": {
+      "default": "h-12 rounded-lg border-slate-200 bg-white px-4 text-slate-900 placeholder:text-slate-400 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 transition-all"
+    }
+  },
+  "image_urls": {
+    "hero": {
+      "url": "https://images.unsplash.com/photo-1721433730939-34917128c2bd?crop=entropy&cs=srgb&fm=jpg&q=85",
+      "alt": "Modern glass skyscraper facade reflecting sky",
+      "usage": "Main Hero Background with overlay"
+    },
+    "factory": {
+      "url": "https://images.unsplash.com/photo-1697281679290-ad7be1b10682?crop=entropy&cs=srgb&fm=jpg&q=85",
+      "alt": "High tech glass manufacturing factory",
+      "usage": "About Us / Manufacturing Capacity section"
+    },
+    "architect": {
+      "url": "https://images.unsplash.com/photo-1754780960162-839cda44d736?crop=entropy&cs=srgb&fm=jpg&q=85",
+      "alt": "Architect reviewing blueprints",
+      "usage": "Services / Industries We Serve section"
+    },
+    "products": {
+      "toughened": "https://images.unsplash.com/photo-1757372430354-18832839f897?crop=entropy&cs=srgb&fm=jpg&q=85",
+      "laminated": "https://images.unsplash.com/photo-1765279077820-d3f4f2bcdca5?crop=entropy&cs=srgb&fm=jpg&q=85",
+      "insulated": "https://images.unsplash.com/photo-1763209230598-3efb61fc36bb?crop=entropy&cs=srgb&fm=jpg&q=85"
+    }
+  },
+  "icons": {
+    "library": "lucide-react",
+    "style": "Stroke width 1.5px, rounded joins",
+    "usage": "Use specific icons for industries (Building, HardHat, Ruler, Truck)"
+  },
+  "motion": {
+    "library": "framer-motion",
+    "variants": {
+      "fadeInUp": {
+        "initial": { "opacity": 0, "y": 20 },
+        "animate": { "opacity": 1, "y": 0 },
+        "transition": { "duration": 0.5, "ease": "easeOut" }
+      },
+      "staggerContainer": {
+        "animate": { "transition": { "staggerChildren": 0.1 } }
+      }
+    }
+  },
+  "universal_guidelines": [
+    "Avoid generic 'Bootstrap' layouts. Use asymmetry.",
+    "Dark colors look good when used independently without gradients. DO NOT use dark colors as gradients",
+    "Create depth through layered design elements with z-index hierarchy",
+    "Use glass-morphism effects with backdrop filters (12-24px blur)",
+    "Every interaction needs micro-animations - hover states, transitions",
+    "Use 2-3x more spacing than feels comfortable",
+    "All interactive elements MUST include data-testid attribute"
+  ],
+  "instructions_to_main_agent": "You are building a Hybrid App (Marketing + SaaS). The Marketing side (Home, About, Services) should feel like a luxury architectural portfolio. The SaaS side (Calculator, Dashboard) should feel like a precision tool (Linear/Linear-like). Use the 'Glassmorphism' visual enhancer heavily in the Marketing side to reinforce the brand product. For the Calculator, prioritize clarity and speed—use the 'Control Room' grid."
+}

@@ -1,0 +1,106 @@
+{
+  "summary": "Completed comprehensive testing of Payment Flow features for Job Work and Customer Portal. All 16 backend API tests passed (100%). Frontend UI testing verified the new payment selection flow: 'Pehle Cash/Online select karo, phir Pay Now button dikhe' - first select payment method, then Pay button appears.",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [
+    "/app/tests/test_payment_flow.py",
+    "/app/tests/test_job_work_customer_portal.py",
+    "/app/test_reports/pytest/payment_flow_results.xml"
+  ],
+  "action_items": [],
+  "critical_code_review_comments": [],
+  "updated_files": [
+    "/app/tests/test_payment_flow.py"
+  ],
+  "success_rate": {
+    "backend": "100% (16/16 tests passed)",
+    "frontend": "100% (All payment flow features verified)"
+  },
+  "test_credentials": {
+    "customer": "test@lucumaa.com / test123",
+    "admin": "admin@lucumaa.in / adminpass"
+  },
+  "seed_data_creation": "Created multiple job work orders during testing to verify 100%/50% advance rule",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "features_tested": {
+    "Customer Portal Payment Flow": {
+      "status": "PASS",
+      "url": "/portal",
+      "features": [
+        "Orders display with Online/Cash payment buttons",
+        "Pay button NOT visible initially (correct behavior)",
+        "Click Online → Blue Pay button appears with correct amount",
+        "Click Cash → Green Pay button appears with correct amount",
+        "Payment badges: Payment Pending, Cash Pending, X% Paid, Paid"
+      ]
+    },
+    "Job Work Page Payment Flow": {
+      "status": "PASS",
+      "url": "/job-work",
+      "features": [
+        "Step 1 (Items): Labour rates display, glass item configuration",
+        "Step 2 (Details): Customer details form, disclaimer acceptance",
+        "Step 3 (Payment): 'Step 1: Select Payment Method' text displayed",
+        "Online Payment option with description 'Pay via UPI, Cards, Net Banking'",
+        "Cash Payment option with description 'Pay at our office when bringing glass'",
+        "Pay button NOT visible initially - shows 'Please select a payment method to continue'",
+        "Click Online → Orange 'Pay ₹X Now' button appears",
+        "Click Cash → Green 'Confirm Cash Payment' button appears with admin notification note"
+      ]
+    },
+    "Job Work 100%/50% Advance Rule": {
+      "status": "PASS",
+      "backend_logic": "Line 346-357 in /app/backend/routers/job_work.py",
+      "features": [
+        "Single item (1 piece) = 100% advance required",
+        "Multiple items (2+ pieces) = 50% advance required",
+        "Advance requirement text displayed on payment step: '100% Advance Required (Single Item Order)' or '50% Advance Required (₹X)'"
+      ]
+    },
+    "Payment Badge Display": {
+      "status": "PASS",
+      "badges_verified": [
+        "Payment Pending (red) - for unpaid orders",
+        "Cash Pending (orange) - for orders with cash preference set",
+        "X% Paid (amber) - for partially paid orders",
+        "Paid (green) - for fully paid orders"
+      ]
+    }
+  },
+  "api_verification": {
+    "POST /api/erp/job-work/orders (single item)": {
+      "status": 200,
+      "advance_percent": 100,
+      "verified": "advance_required equals grand_total"
+    },
+    "POST /api/erp/job-work/orders (multiple items)": {
+      "status": 200,
+      "advance_percent": 50,
+      "verified": "advance_required equals 50% of grand_total"
+    },
+    "POST /api/erp/job-work/orders/{id}/set-cash-preference": {
+      "status": 200,
+      "verified": "payment_preference set to 'cash'"
+    },
+    "POST /api/erp/job-work/orders/{id}/initiate-payment": {
+      "status": 200,
+      "response_fields": ["razorpay_order_id", "amount", "amount_rupees", "advance_percent"]
+    },
+    "GET /api/erp/job-work/my-orders": {
+      "status": 200,
+      "verified": "Orders have payment_status, advance_percent, advance_paid fields"
+    }
+  },
+  "mocked_apis": {
+    "WhatsApp/Twilio": "If Twilio not configured, notifications are logged but not sent"
+  },
+  "context_for_next_testing_agent": "Payment flow updated per user requirement: 'Pehle Cash/Online select karo, phir Pay Now button dikhe'. Both Customer Portal (/portal) and Job Work Page (/job-work) now require selecting payment method first before Pay button appears. Backend correctly implements 100%/50% advance rule (single item = 100%, 2+ items = 50%). All tests passing. Preview URL: https://glassmesh.preview.emergentagent.com"
+}

@@ -1,0 +1,190 @@
+<analysis>**original_problem_statement:**
+The user's initial goal was a comprehensive ERP system, which evolved into creating a highly interactive 3D glass configurator. The project has undergone multiple major revisions and enhancements.
+
+**Latest Feature Requests (Consolidated):**
+
+1.  **Core Interaction & Production Readiness (Mostly Implemented):**
+    *   Click-to-place shapes (Holes, Rectangles, etc.) with gizmo-based controls for moving, resizing, and rotating.
+    *   Production Mode with numbered cutouts, center marks, high-contrast dimension lines, a grid overlay, and PDF export.
+    *   Shareable configurations via link, email, and WhatsApp, complete with QR code generation.
+    *   A measurement tool to check distances between any two points on the glass.
+    *   New cutout shapes: Corner Notch and a placeholder for Freeform Polygon drawing.
+    *   3D view controls (front, top, angle) and a larger preview toggle.
+
+2.  **Current & Upcoming Requests:**
+    *   **Glass Preview Enhancement (In Progress):** Display the glass in a fixed, larger, vertical (portrait) orientation. The visual size of the glass must not change when dimensions are updated; only the dimension labels should change.
+    *   **Auto-Align Feature (In Progress):** Add a feature to automatically snap cutouts to the horizontal and vertical center lines of the glass.
+    *   **Door Fittings Templates (In Progress):** Create pre-configured templates for common door hardware (handles, locks, floor machines) that can be placed at standard positions (e.g., center, 5 inches from edge, floor level).
+    *   **Freeform Polygon Drawing (Not Started):** Allow users to draw custom cutout shapes directly on the glass.
+
+**User's preferred language**: The user communicates in a mix of English and Hinglish (e.g., Samajh gaya!, sab implement karo). The next agent **MUST** respond in a similar conversational style.
+
+**what currently exists?**
+A highly advanced, full-stack 3D glass configurator with two parallel interfaces ( and ). The application is very stable and feature-rich.
+
+Key implemented features include:
+-   **Stable 3D Engine:** Uses Babylon.js for rendering. The glass panel is fixed and does not blink or re-render during interactions.
+-   **Advanced Gizmo Controls:** Users can click to place shapes and then drag, resize (8 handles), and rotate them.
+-   **Production Mode:** Includes toggles for numbered labels, center marks, a grid overlay, and high-contrast dimension lines.
+-   **PDF & Sharing:** Backend-generated PDF exports, plus a Share feature that creates a unique, viewable link with a QR code.
+-   **New Shapes & Tools:** A Corner Notch shape and a Measurement Tool for checking distances are fully functional.
+-   **UI Enhancements:** The UI includes 3D view controls (Front, Angle, Top) and a Large Preview toggle.
+-   **Fixed Glass Preview (Initial version):** The glass preview's visual size is now independent of its actual dimensions, a critical requirement for production printing.
+
+**Last working item**:
+-   **Last item agent was working**: Implementing the user's latest three requests:
+    1.  **Vertical & Fixed Glass:** Modifying the 3D scene to render the glass in a larger, fixed-size, portrait orientation.
+    2.  **Auto-Align Feature:** Adding functions and UI to snap cutouts to the glass's center lines.
+    3.  **Door Fittings Templates:** Adding data for door hardware templates (handle, lock, etc.) and the UI to place them.
+    The agent has already applied the code changes for these features in  and was about to test them with a screenshot.
+-   **Status**: IN PROGRESS
+-   **Agent Testing Done**: N
+-   **Which testing method agent to use?**: manual testing by screenshot tool, followed by  after all three features are verified to be working.
+-   **User Testing Done**: N
+
+**All Pending/In progress Issue list**:
+-   **Issue 1: (P0) Complete & Test Latest Features in GlassConfigurator3D.js**
+    -   **Attempted fixes**: The agent has already edited  to implement the vertical/fixed glass preview, add data and UI for door fittings, and add the auto-align feature.
+    -   **Next debug checklist**:
+        1.  Take a screenshot of the  page to verify the new vertical glass layout, the Auto-Align button, and the Door Fittings template panel.
+        2.  Test the functionality: Can you add a door handle? Does the auto-align button correctly center a selected cutout? Is the glass preview larger and in portrait mode?
+        3.  Debug any visual or functional issues. The code for all three features is new and may have bugs.
+    -   **Why fix this issue and what will be achieved with the fix?**: This directly addresses the user's latest requests for a more professional, production-ready layout and tooling.
+    -   **Status**: IN PROGRESS
+    -   **Is recurring issue?**: N
+    -   **Should Test frontend/backend/both after fix?**: Frontend
+    -   **Blocked on other issue**: None
+
+-   **Issue 2: (P1) Implement Freeform Polygon Drawing**
+    -   **Attempted fixes**: A Freeform button has been added to the UI, and state (, ) has been created.
+    -   **Next debug checklist**:
+        1.  In , enhance  and  to capture and store polygon vertices when  is true.
+        2.  Implement a Finish Drawing button or double-click logic.
+        3.  Update  to handle the  shape type, using  from Babylon.js with the collected points.
+        4.  Ensure the custom shape can be subtracted from the glass mesh and supports resizing/moving.
+    -   **Why fix this issue and what will be achieved with the fix?**: Fulfills a key user request for creating fully custom cutout shapes.
+    -   **Status**: NOT STARTED
+    -   **Is recurring issue?**: N
+    -   **Should Test frontend/backend/both after fix?**: Frontend
+    -   **Blocked on other issue**: None
+
+-   **Issue 3: (P2) Port All New Features to JobWork3DConfigurator.js**
+    -   **Attempted fixes**: The file was previously overwritten with code from , but it is now out of sync again.
+    -   **Next debug checklist**:
+        1.  Once all features in  are stable, copy its entire content to .
+        2.  Carefully adapt the data fetching (e.g., use job work APIs), pricing logic, and UI configuration to match the job work context.
+        3.  Thoroughly test the  route to ensure all new features (Share, QR, Measurement, Vertical Layout, Auto-Align, Door Fittings, etc.) work correctly.
+    -   **Why fix this issue and what will be achieved with the fix?**: Ensures feature parity between the two configurators, a recurring user requirement.
+    -   **Status**: NOT STARTED
+    -   **Is recurring issue?**: N
+    -   **Should Test frontend/backend/both after fix?**: Frontend
+    -   **Blocked on other issue**: Issue 1, Issue 2
+
+**In progress Task List**:
+-   **Task 1: Finalize Vertical Layout, Auto-Align, and Door Fittings**
+    -   **Where to resume**: The code is implemented in . The immediate next step is to take a screenshot to test the UI and functionality.
+    -   **What will be achieved with this?**: A more intuitive and powerful configurator that matches professional CAD tools.
+    -   **Status**: IN PROGRESS
+    -   **Should Test frontend/backend/both after fix?**: Frontend
+    -   **Blocked on something**: None
+
+**Upcoming and Future Tasks**
+-   **Upcoming Tasks:**
+    -   **(P2) Automatic Transport Charges Calculation:** Implement the deferred task to automatically calculate and add transport charges to an invoice.
+-   **Future Tasks:**
+    -   **(P3) Convert Razorpay Payouts to Live Mode:** Switch the mocked vendor payment system to use live RazorpayX Payout API credentials.
+    -   **(P4) SFA - Native Mobile App:** Develop a native mobile application for the Sales Force Automation module.
+
+**Completed work in this session**
+-   **Production Mode Features (DONE):** Implemented numbered labels, center marks, grid overlay, high-contrast colors, and backend PDF export in .
+-   **Feature Parity for Job Work (DONE):** Ported all Production Mode features to .
+-   **Share & QR Code Feature (DONE):** Created backend endpoints and frontend UI to generate shareable links, send them via Email/WhatsApp, and display a downloadable QR code.
+-   **Fixed Glass Preview (DONE):** Re-architected the 3D scene so the glass maintains a fixed visual size, with only dimension labels changing.
+-   **New Shapes & Tools (DONE):** Added Corner Notch as a new shape type and a fully functional Measurement Tool.
+-   **UI/UX Enhancements (DONE):** Added 3D view rotation controls and a Large Preview toggle.
+
+**Earlier issues found/mentioned but not fixed**
+-   **Automatic Transport Charges:** This task was acknowledged but has been deferred in favor of the extensive 3D configurator work.
+
+**Known issue recurrence from previous fork**
+-   None.
+
+**Code Architecture**
+
+
+**Key Technical Concepts**
+-   **3D Rendering (Babylon.js):** Advanced usage including orthographic cameras, dynamic mesh creation (, ), Constructive Solid Geometry (CSG), and dynamic camera controls ().
+-   **State Management & Stability:** Extensive use of  to prevent re-renders and access the latest state in event handlers, which is critical for UI stability. Direct mesh manipulation for smooth drag/resize/rotate interactions.
+-   **Backend Services:** PDF generation with  and a new database model for storing and retrieving shared configurations.
+-   **Frontend Interactivity:** Complex state management for different UI modes (placement, drawing, measuring).
+-   **QR Code Generation:** Using  on the frontend for displaying QR codes in the share modal.
+
+**key DB schema**
+-   **shared_configurations**: 
+
+**changes in tech stack**
+-   **qrcode.react:** Added to  for QR code UI.
+-   **qrcode:** Added to  (though seemingly unused, it was installed).
+
+**All files of reference**
+-   : The primary file containing all new features. It is now very large (>2800 lines).
+-   : The parallel component that needs a full update.
+-   : Backend logic for PDF export and the new Share feature.
+-   : New page for viewing shared designs.
+-   : Contains routing for the application.
+
+**Areas that need refactoring**:
+-    and  share almost identical code. This is a major violation of the DRY principle. They should be refactored into a single, reusable  component that accepts props for configuration (e.g.,  vs ) to handle the minor differences in API calls and UI.
+-    is now excessively long and complex. It should be broken down into smaller, manageable custom hooks (e.g., , , ) and sub-components.
+
+**key api endpoints**
+-   : Generates and returns a PDF of the configuration.
+-   : Creates a new shareable configuration and returns a unique ID/URL.
+-   : Retrieves a saved configuration.
+
+**Critical Info for New Agent**
+-   Your immediate priority is to test the three features just implemented: **Vertical/Fixed Glass Preview, Auto-Align, and Door Fittings.** The code has been written but not yet tested. Start by taking a screenshot.
+-   Do not try to patch . After  is fully stable, the plan is to replace the job work file's content entirely and then adapt it. Be aware of the need for future refactoring to a single reusable component.
+-   The Freeform Polygon Drawing feature is next on the list. The UI button exists, but the core drawing logic on the canvas needs to be built from scratch.
+
+**documents and test reports created in this job**
+-   
+-   
+-    (Updated multiple times)
+
+**Last 10 User Messages and any pending HUMAN messages**
+-   **10. User:** Asks for Corner Cut and Freeform drawing, plus 3D rotation and a larger preview. (Implemented)
+-   **9. Agent:** Confirms the plan to implement all four features.
+-   **8. User:** continue as you wish
+-   **7. Agent:** Starts implementing the features. (In Progress)
+-   **6. Agent:** (Fixes linting errors during implementation).
+-   **5. Agent:** (Finishes implementation and shows screenshots of the new features working).
+-   **4. Agent:** Proposes adding a Measurement Tool.
+-   **3. User:** ok (Agrees to Measurement Tool).
+-   **2. Agent:** Implements and tests the Measurement Tool successfully.
+-   **1. User:** Asks for the glass to be fixed, vertical, and larger. Also requests auto-align and door fitting templates. (This is the **current task**).
+
+**Project Health Check:**
+-   **Broken:** None
+-   **Mocked:** Razorpay Payouts API.
+
+**3rd Party Integrations**
+-   **Babylon.js**: Core library for all 3D rendering and interaction.
+-   **reportlab**: Backend library for generating PDF documents.
+-   **qrcode.react**: Frontend library for generating QR codes.
+-   **Razorpay**: Mocked for Payouts.
+-   **Twilio**: For SMS/WhatsApp notifications.
+-   **APScheduler**: For background jobs.
+
+**Testing status**
+-   **Testing agent used after significant changes:** YES. The agent was used successfully to test Production Mode and the Share feature, passing all tests.
+-   **Troubleshoot agent used after agent stuck in loop:** NO.
+-   **Test files created:** Backend test files were updated by the testing agent.
+-   **Known regressions:** None.
+
+**Credentials to test flow:**
+-   **Super Admin:**  / 
+-   **Test Customer:**  / 
+
+**What agent forgot to execute**
+-   The agent correctly stubbed out the Freeform Polygon feature by adding the button and state but has not yet implemented the core drawing logic. This is captured in the pending issue list.</analysis>

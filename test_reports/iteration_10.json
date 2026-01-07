@@ -1,0 +1,91 @@
+{
+  "summary": "Completed comprehensive testing of OTP Authentication APIs and Customer Portal. All 22 backend API tests passed (100%). Frontend Customer Portal verified with all 4 tabs (Dashboard, My Orders, Wallet, Profile) working correctly. Referral code display and copy functionality working.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {
+        "endpoint": "/api/erp/customer/*",
+        "issue": "ERP customer routes return data for unauthenticated requests instead of 401. Uses system user fallback.",
+        "priority": "MEDIUM",
+        "note": "Security concern - customer endpoints should require authentication"
+      }
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [
+    "/app/tests/test_otp_customer_portal.py",
+    "/app/test_reports/pytest/otp_customer_portal_results.xml"
+  ],
+  "action_items": [
+    "Consider adding proper 401 response for unauthenticated customer portal API requests in /app/backend/routers/base.py get_erp_user()"
+  ],
+  "critical_code_review_comments": [
+    "OTP authentication flow is complete: send-otp -> verify-otp -> reset-password",
+    "OTP stored in otp_codes collection with 10-minute expiry",
+    "Password reset uses separate reset_token with 1-hour expiry",
+    "Customer Portal frontend correctly redirects to /login when not authenticated",
+    "Referral code X9HETDVO displayed correctly with copy/share functionality",
+    "Wallet balance ₹175 displayed correctly across Dashboard and Wallet tabs"
+  ],
+  "updated_files": [
+    "/app/tests/test_otp_customer_portal.py"
+  ],
+  "success_rate": {
+    "backend": "100% (22/22 tests passed)",
+    "frontend": "100% (All 4 Customer Portal tabs working)"
+  },
+  "test_credentials": {
+    "admin": {
+      "email": "admin@lucumaa.in",
+      "password": "adminpass"
+    }
+  },
+  "seed_data_creation": "Test user, support ticket, and address created with TEST_ prefix during testing",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "features_tested": {
+    "OTP Authentication APIs": {
+      "POST /api/auth/send-otp (email)": "PASS - Sends OTP to email, stores in otp_codes collection",
+      "POST /api/auth/send-otp (missing identifier)": "PASS - Returns 400",
+      "POST /api/auth/send-otp (reset purpose)": "PASS - Sends OTP for password reset",
+      "POST /api/auth/verify-otp (invalid)": "PASS - Returns 400 for invalid OTP",
+      "POST /api/auth/verify-otp (missing fields)": "PASS - Returns 400",
+      "POST /api/auth/reset-password (missing token)": "PASS - Returns 400",
+      "POST /api/auth/reset-password (invalid token)": "PASS - Returns 400",
+      "POST /api/auth/reset-password (short password)": "PASS - Returns 400 for <6 char password"
+    },
+    "Customer Portal APIs": {
+      "GET /api/erp/customer/dashboard": "PASS - Returns stats (total_orders, total_spent, pending_orders, wallet_balance), recent_orders, referral_code, referral_count",
+      "GET /api/erp/customer/orders": "PASS - Returns list of customer orders",
+      "GET /api/erp/customer/orders?status=pending": "PASS - Filters orders by status",
+      "GET /api/erp/customer/orders/{id}": "PASS - Returns 404 for non-existent order",
+      "GET /api/erp/customer/profile": "PASS - Returns user info, wallet, addresses (excludes password_hash)",
+      "PUT /api/erp/customer/profile": "PASS - Updates profile fields",
+      "GET /api/erp/customer/invoices": "PASS - Returns customer invoices",
+      "POST /api/erp/customer/support/ticket": "PASS - Creates support ticket",
+      "GET /api/erp/customer/support/tickets": "PASS - Returns customer tickets",
+      "POST /api/erp/customer/addresses": "PASS - Adds new address",
+      "GET /api/erp/customer/orders/{id}/track": "PASS - Returns 404 for non-existent order"
+    },
+    "Customer Portal Frontend": {
+      "Dashboard Tab": "PASS - Shows 4 stat cards (Total Orders: 4, Total Spent: ₹0, Pending Orders: 4, Wallet Balance: ₹175), Refer & Earn section with referral code X9HETDVO, Recent Orders list",
+      "My Orders Tab": "PASS - Shows All Orders (4) with Order ID, Status, Product, Dimensions, Quantity, Amount, Date, Payment Status",
+      "Wallet Tab": "PASS - Shows Available Balance ₹175, Your Referral Code X9HETDVO with Copy/Share buttons, Referral Stats, How to Use Wallet instructions",
+      "Profile Tab": "PASS - Shows User Info (name, email, phone, member since, account type), Saved Addresses, Need Help section (FAQs, Support Ticket, Call Us)",
+      "Copy Referral Code": "PASS - Copy button functional",
+      "Authentication": "PASS - Redirects to /login when not authenticated"
+    }
+  },
+  "security_concerns": {
+    "issue": "ERP customer routes use auto_error=False for HTTPBearer and return system user for unauthenticated requests",
+    "file": "/app/backend/routers/base.py",
+    "function": "get_erp_user()",
+    "impact": "Customer endpoints return empty data instead of 401 for unauthenticated requests",
+    "recommendation": "Add proper authentication check for customer-specific endpoints"
+  },
+  "context_for_next_testing_agent": "OTP authentication and Customer Portal fully tested. OTP flow: send-otp (email/mobile) -> verify-otp (returns token for login or reset_token for password reset) -> reset-password (uses reset_token). Customer Portal at /portal has 4 tabs: Dashboard, My Orders, Wallet, Profile. Referral code X9HETDVO, Wallet balance ₹175. Login: admin@lucumaa.in / adminpass. Previous iterations tested ERP modules (Expenses, Assets, Holidays, CRM, Production, HR, Inventory, Purchase, Accounts, Admin Dashboard, Payouts, QR Codes, Wallet)."
+}

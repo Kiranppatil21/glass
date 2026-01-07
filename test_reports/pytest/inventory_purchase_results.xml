@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="8" skipped="0" tests="24" time="1.975" timestamp="2026-01-01T12:05:37.814205+00:00" hostname="agent-env-eee6c9ff-c902-48ec-b9ca-1f31955a130e"><testcase classname="tests.test_inventory_purchase.TestInventoryMaterials" name="test_get_materials" time="0.075" /><testcase classname="tests.test_inventory_purchase.TestInventoryMaterials" name="test_create_material" time="0.119" /><testcase classname="tests.test_inventory_purchase.TestInventoryMaterials" name="test_get_material_by_id" time="0.077" /><testcase classname="tests.test_inventory_purchase.TestInventoryMaterials" name="test_get_material_not_found" time="0.038" /><testcase classname="tests.test_inventory_purchase.TestInventoryMaterials" name="test_update_material" time="0.117" /><testcase classname="tests.test_inventory_purchase.TestInventoryMaterials" name="test_get_materials_by_category" time="0.037" /><testcase classname="tests.test_inventory_purchase.TestInventoryMaterials" name="test_get_low_stock_items" time="0.043" /><testcase classname="tests.test_inventory_purchase.TestInventoryTransactions" name="test_stock_in_transaction" time="0.070"><failure message="assert 520 == 200&#10; +  where 520 = &lt;Response [520]&gt;.status_code">tests/test_inventory_purchase.py:148: in test_stock_in_transaction
+    assert response.status_code == 200
+E   assert 520 == 200
+E    +  where 520 = &lt;Response [520]&gt;.status_code</failure></testcase><testcase classname="tests.test_inventory_purchase.TestInventoryTransactions" name="test_stock_out_transaction" time="0.067"><failure message="assert 520 == 200&#10; +  where 520 = &lt;Response [520]&gt;.status_code">tests/test_inventory_purchase.py:178: in test_stock_out_transaction
+    assert response.status_code == 200
+E   assert 520 == 200
+E    +  where 520 = &lt;Response [520]&gt;.status_code</failure></testcase><testcase classname="tests.test_inventory_purchase.TestInventoryTransactions" name="test_stock_out_insufficient_stock" time="0.073" /><testcase classname="tests.test_inventory_purchase.TestInventoryTransactions" name="test_get_transactions" time="0.035" /><testcase classname="tests.test_inventory_purchase.TestInventoryTransactions" name="test_get_transactions_by_material" time="0.075" /><testcase classname="tests.test_inventory_purchase.TestInventoryTransactions" name="test_get_transactions_by_type" time="0.039" /><testcase classname="tests.test_inventory_purchase.TestSupplierManagement" name="test_get_suppliers" time="0.040" /><testcase classname="tests.test_inventory_purchase.TestSupplierManagement" name="test_create_supplier" time="0.071" /><testcase classname="tests.test_inventory_purchase.TestPurchaseOrders" name="test_get_purchase_orders" time="0.033" /><testcase classname="tests.test_inventory_purchase.TestPurchaseOrders" name="test_create_purchase_order" time="0.106"><failure message="assert 520 == 200&#10; +  where 520 = &lt;Response [520]&gt;.status_code">tests/test_inventory_purchase.py:323: in test_create_purchase_order
+    assert response.status_code == 200
+E   assert 520 == 200
+E    +  where 520 = &lt;Response [520]&gt;.status_code</failure></testcase><testcase classname="tests.test_inventory_purchase.TestPurchaseOrders" name="test_create_po_with_multiple_items" time="0.108"><failure message="assert 520 == 200&#10; +  where 520 = &lt;Response [520]&gt;.status_code">tests/test_inventory_purchase.py:377: in test_create_po_with_multiple_items
+    assert response.status_code == 200
+E   assert 520 == 200
+E    +  where 520 = &lt;Response [520]&gt;.status_code</failure></testcase><testcase classname="tests.test_inventory_purchase.TestPurchaseOrders" name="test_get_po_by_id" time="0.109"><failure message="requests.exceptions.JSONDecodeError: Expecting value: line 1 column 1 (char 0)">/root/.venv/lib/python3.11/site-packages/requests/models.py:976: in json
+    return complexjson.loads(self.text, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/json/__init__.py:346: in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/json/decoder.py:337: in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/json/decoder.py:355: in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+E   json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+
+During handling of the above exception, another exception occurred:
+tests/test_inventory_purchase.py:402: in test_get_po_by_id
+    po_id = create_response.json()["po_id"]
+            ^^^^^^^^^^^^^^^^^^^^^^
+/root/.venv/lib/python3.11/site-packages/requests/models.py:980: in json
+    raise RequestsJSONDecodeError(e.msg, e.doc, e.pos)
+E   requests.exceptions.JSONDecodeError: Expecting value: line 1 column 1 (char 0)</failure></testcase><testcase classname="tests.test_inventory_purchase.TestPurchaseOrders" name="test_get_po_not_found" time="0.036" /><testcase classname="tests.test_inventory_purchase.TestPurchaseOrders" name="test_get_pos_by_status" time="0.078" /><testcase classname="tests.test_inventory_purchase.TestPOStatusWorkflow" name="test_po_status_workflow_complete" time="0.107"><failure message="assert 520 == 200&#10; +  where 520 = &lt;Response [520]&gt;.status_code">tests/test_inventory_purchase.py:459: in test_po_status_workflow_complete
+    assert create_response.status_code == 200
+E   assert 520 == 200
+E    +  where 520 = &lt;Response [520]&gt;.status_code</failure></testcase><testcase classname="tests.test_inventory_purchase.TestPOStatusWorkflow" name="test_po_cancel" time="0.111"><failure message="requests.exceptions.JSONDecodeError: Expecting value: line 1 column 1 (char 0)">/root/.venv/lib/python3.11/site-packages/requests/models.py:976: in json
+    return complexjson.loads(self.text, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/json/__init__.py:346: in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/json/decoder.py:337: in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/json/decoder.py:355: in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+E   json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+
+During handling of the above exception, another exception occurred:
+tests/test_inventory_purchase.py:535: in test_po_cancel
+    po_id = create_response.json()["po_id"]
+            ^^^^^^^^^^^^^^^^^^^^^^
+/root/.venv/lib/python3.11/site-packages/requests/models.py:980: in json
+    raise RequestsJSONDecodeError(e.msg, e.doc, e.pos)
+E   requests.exceptions.JSONDecodeError: Expecting value: line 1 column 1 (char 0)</failure></testcase><testcase classname="tests.test_inventory_purchase.TestPOStatusWorkflow" name="test_invalid_status_update" time="0.112"><failure message="requests.exceptions.JSONDecodeError: Expecting value: line 1 column 1 (char 0)">/root/.venv/lib/python3.11/site-packages/requests/models.py:976: in json
+    return complexjson.loads(self.text, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/json/__init__.py:346: in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/json/decoder.py:337: in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/json/decoder.py:355: in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+E   json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+
+During handling of the above exception, another exception occurred:
+tests/test_inventory_purchase.py:563: in test_invalid_status_update
+    po_id = create_response.json()["po_id"]
+            ^^^^^^^^^^^^^^^^^^^^^^
+/root/.venv/lib/python3.11/site-packages/requests/models.py:980: in json
+    raise RequestsJSONDecodeError(e.msg, e.doc, e.pos)
+E   requests.exceptions.JSONDecodeError: Expecting value: line 1 column 1 (char 0)</failure></testcase></testsuite></testsuites>

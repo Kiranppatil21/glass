@@ -1,0 +1,126 @@
+{
+  "summary": "Completed testing of Customer Profile Authorization fix and GST Checkbox functionality. All features working correctly: (1) Customers can now save their own profiles without authorization error, (2) GST checkbox 'Do you have GSTIN / Do you need GST Invoice?' appears for Individual/Retail types, (3) Checking GST checkbox shows GSTIN, PAN, GST Type fields, (4) Unchecking shows B2C note, (5) Company types (Pvt Ltd/Ltd) always show GST fields without checkbox, (6) Backend correctly sets invoice_type to B2B/B2C based on needs_gst_invoice field.",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [
+    "/app/tests/test_customer_profile_gst.py",
+    "/app/test_reports/pytest/customer_profile_gst_results.xml"
+  ],
+  "action_items": [],
+  "critical_code_review_comments": [],
+  "updated_files": [
+    "/app/tests/test_customer_profile_gst.py"
+  ],
+  "success_rate": {
+    "backend": "100% (9/9 tests passed)",
+    "frontend": "100% (All UI features verified)"
+  },
+  "test_credentials": {
+    "test_customer": "test@lucumaa.com / test123",
+    "admin": "admin@lucumaa.in / adminpass"
+  },
+  "seed_data_creation": "Created test customers during backend tests (auto-deactivated after tests)",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "features_tested": {
+    "Authorization Fix - Customer Can Save Own Profile": {
+      "status": "PASS",
+      "test_method": "Backend pytest + Frontend Playwright",
+      "details": "Customer logged in as test@lucumaa.com can successfully update their own profile via PUT /api/erp/customer-master/{id} without 403 error"
+    },
+    "Customer Portal - GST Checkbox Appears for Individual Type": {
+      "status": "PASS",
+      "location": "Edit Profile Modal > Section 2: GST & Tax Details",
+      "checkbox_text": "Do you have GSTIN / Do you need GST Invoice?",
+      "verified": "Checkbox visible with blue background, shows B2B/B2C note based on state"
+    },
+    "Customer Portal - Checking GST Checkbox Shows GST Fields": {
+      "status": "PASS",
+      "fields_shown": ["GSTIN Number *", "PAN Number *", "GST Type dropdown", "Place of Supply dropdown"],
+      "note_shown": "✓ B2B Invoice will be generated with GST details"
+    },
+    "Customer Portal - Unchecking GST Checkbox Hides GST Fields": {
+      "status": "PASS",
+      "note_shown": "Retail Customer (B2C): Invoice will be generated in customer's individual name. GST included in price."
+    },
+    "Customer Portal - Company Type Shows GST Fields Without Checkbox": {
+      "status": "PASS",
+      "note": "For pvt_ltd/ltd types, GST fields are always shown without checkbox (B2B mandatory)"
+    },
+    "Customer Portal - Validation Requires GSTIN, PAN, Company Name When GST Checked": {
+      "status": "PASS",
+      "validation_messages": [
+        "GSTIN is required when GST Invoice is needed",
+        "Company/Firm name is required for GST Invoice",
+        "PAN is required for GST Invoice"
+      ]
+    },
+    "ERP Customer Master - Same GST Checkbox Logic Works": {
+      "status": "PASS",
+      "location": "Add New Customer Modal > 2. GST & Tax tab",
+      "checkbox_text": "Do you have GSTIN / Do you need GST Invoice?",
+      "data_testid": "needs-gst-checkbox"
+    },
+    "Backend - needs_gst_invoice Field Saved Correctly": {
+      "status": "PASS",
+      "test": "test_needs_gst_invoice_sets_b2b",
+      "verified": "Creating customer with needs_gst_invoice=true saves field correctly"
+    },
+    "Backend - invoice_type Set to B2B When needs_gst_invoice=true": {
+      "status": "PASS",
+      "test": "test_needs_gst_invoice_sets_b2b",
+      "verified": "invoice_type automatically set to 'B2B' when needs_gst_invoice=true"
+    },
+    "Backend - invoice_type Set to B2B for Company Types": {
+      "status": "PASS",
+      "test": "test_company_type_always_b2b",
+      "verified": "pvt_ltd/ltd types automatically get invoice_type='B2B' and needs_gst_invoice=true"
+    },
+    "Backend - invoice_type Set to B2C When needs_gst_invoice=false": {
+      "status": "PASS",
+      "test": "test_individual_without_gst_is_b2c",
+      "verified": "Individual without GST gets invoice_type='B2C'"
+    },
+    "Backend - Updating needs_gst_invoice Changes invoice_type": {
+      "status": "PASS",
+      "test": "test_update_needs_gst_invoice_changes_invoice_type",
+      "verified": "Toggling needs_gst_invoice from false to true changes invoice_type from B2C to B2B"
+    }
+  },
+  "ui_verification": {
+    "Customer Portal Profile Tab": {
+      "Edit Profile button": "Visible with data-testid='edit-profile-btn'",
+      "Customer Profile card": "Shows customer code, name, GSTIN, credit limit, credit days, B2B badge"
+    },
+    "Edit Profile Modal": {
+      "Header": "Edit Your Profile with gradient background (teal to blue)",
+      "Section 1": "Basic Identity - Customer Type, Company/Firm Name, Contact Person, Mobile, Email",
+      "Section 2": "GST & Tax Details - GST checkbox, GSTIN, PAN, GST Type, Place of Supply",
+      "Section 3": "Billing Address (Mandatory)",
+      "Section 4": "Shipping / Site Addresses (Optional)",
+      "Save Profile button": "Bottom right with save icon"
+    },
+    "ERP Customer Master Page": {
+      "Stats cards": "Total Customers, B2B Customers, B2C Customers, Credit Customers, KYC Verified, KYC Pending",
+      "Add Customer button": "data-testid='add-customer-btn'",
+      "Customer table": "Shows Code, Customer, Contact, GSTIN, Category, Credit, KYC, Actions"
+    },
+    "ERP Add Customer Modal": {
+      "Tabs": "1. Basic Identity, 2. GST & Tax, 3. Addresses, 4. Credit Control, 5. Bank Details, 6. Invoice Prefs",
+      "GST checkbox": "data-testid='needs-gst-checkbox'",
+      "B2C note": "Retail Customer (B2C): Invoice will be generated in customer's individual name. GST included in price."
+    }
+  },
+  "mocked_apis": {
+    "has_mocked_apis": false,
+    "note": "All APIs are real implementations"
+  },
+  "context_for_next_testing_agent": "Customer Profile Authorization and GST Checkbox features fully tested and working. Key implementation details: (1) Backend update_customer_profile function checks is_own_profile by matching mobile/email/migrated_from_user_id, (2) Frontend shows GST checkbox for non-company types (individual, proprietor, partnership), (3) Company types (pvt_ltd, ltd) always show GST fields without checkbox, (4) needs_gst_invoice field controls invoice_type (B2B/B2C). Test customer test@lucumaa.com is linked to ABC Builders Pvt Ltd profile. Preview URL: https://glassmesh.preview.emergentagent.com"
+}
